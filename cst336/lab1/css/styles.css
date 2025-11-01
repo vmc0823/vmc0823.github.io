@@ -47,3 +47,7 @@ main {
   background: #f3e8ff;           
   border-radius: 6px;
 }
+
+table {
+    margin: 0px auto;
+}
