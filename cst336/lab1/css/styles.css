@@ -1,0 +1,49 @@
+body {
+    background-color: black;
+    color:gray;
+}
+
+header, main, nav, footer {
+    text-align: center;
+}
+
+nav a { /* links within "nav" container */
+    padding: 15px;
+    padding-bottom:4px;
+    font-size: 1.8em;
+    text-decoration: none; /* removes underline */
+    color: white;       /*by default, links are blue */
+}
+
+nav a:hover { /*pseudo class*/
+    border-bottom:2px orange solid;
+    font-size: 2em;
+    transition: .9s; /*transition effect */
+}
+
+main {
+    display: flex;
+    justify-content: center;
+}
+
+.site-footer {
+    font-size: 0.8rem;
+    color: #0edbd4;
+    text-align: center;
+    padding: 16px 12px 24px;
+}
+
+.main-nav a{
+  padding: 8px 12px;
+  text-decoration: none;
+  color: #333;
+}
+.main-nav a:hover{ text-decoration: underline; }
+
+.main-nav a.active{
+  color: #ffffff;                
+  font-weight: 700;               
+  border-bottom: 3px solid #ffffff;  
+  background: #f3e8ff;           
+  border-radius: 6px;
+}
