@@ -1,6 +1,7 @@
 body {
     background-color: black;
     color:gray;
+    text-align: center;
 }
 
 header, main, nav, footer {
@@ -26,8 +27,12 @@ main {
     justify-content: center;
 }
 
+table {
+    margin: 0px auto;
+}
+
 .site-footer {
-    font-size: 0.8rem;
+    font-size: 0.8rem; /*reduced font size per lab's prompt*/
     color: #0edbd4;
     text-align: center;
     padding: 16px 12px 24px;
@@ -48,6 +53,48 @@ main {
   border-radius: 6px;
 }
 
-table {
-    margin: 0px auto;
+td {
+    padding-right: 10px;
+    font-size: 1.3em;
+}
+
+td strong {
+    color: orange;
+}
+
+#table-header { /*hash means id*/
+    background-color: #351a00;
+}
+
+.table-row { /*period means class*/
+    background-color: #753900;
+}
+
+ul {
+    width:500px;
+    margin: 0 auto;
+    text-align: left;
+}
+
+.hobby {
+    color: yellow;
+}
+
+body {
+  font-family: "Open Sans", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 600;
+  font-style: normal;
+  font-variation-settings: "wdth" 100;
+}
+
+h1{
+        font-family: 'Arial', cursive;
+        font-size: 3em;
+        margin-bottom: 0px;
+    }
+
+nav a.active{
+  font-weight: 700;          /* bold */
+  border-bottom: 3px solid #db900e;  /* visible on black bg */
 }
