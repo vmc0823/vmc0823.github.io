@@ -23,9 +23,15 @@
 
     <br /><br />
 
+    <section>
+      <pre>
+        load target → create symbolic state → explore paths (with limits) → summarize results → review in UI
+      </pre>
+    </section>
+
     <main>
       <div class="hero-text">
-        <h2>What is Binary Analysis?</h2>
+        <h2>What is <a href="https://www.blackduck.com/glossary/what-is-binary-code-binary-analysis.html" target="_blank" rel="noopener noreferrer">Binary Analysis</a>?</h2>
         <p>
           Binary analysis studies compiled programs (no source code required) to understand how they behave: what code runs, what inputs steer execution, and where bugs might live. 
           Tools emulate instructions, track memory/registers, and reason about paths to surface issues like buffer overflows or use-after-free. This is useful for reverse engineering, red-teaming, and vulnerability research.
@@ -35,6 +41,19 @@
           Symbolic execution runs a program with symbolic inputs instead of concrete values. When the program branches on a symbolic value, the engine can follow both sides, recording the logical condition (constraint) that makes each path possible. Solving those constraints gives test inputs that reproduce each path—including bug-revealing ones. 
           It’s powerful, but it is important to manage path explosion (the number of paths can blow up) with strategies and limits.
         </p>
+        <p>
+            <strong>Consider this simple program:</strong><pre>const char* check_value(int x) {
+    if (x > 5) {
+        return "Greater";
+    } else {
+        return "Lesser or Equal";
+    }
+}
+
+Path 1: X > 5 leading to the result "Greater"
+Path 2: X <= 5 leading to the result "Lesser or Equal"
+Constraints for both paths are generated and solved to understand all possible behaviors of the program.</pre>
+        </p>
         <h2>What is <a href="https://docs.angr.io/" target="_blank" rel="noopener noreferrer">angr</a>?</h2>
         <p>
           angr is a Python framework for binary analysis. 
@@ -43,15 +62,31 @@
       </div>
     </main>
 
-    <section>
-      <pre>
-        load target → create symbolic state → explore paths (with limits) → summarize results → review in UI
-      </pre>
-    </section>
+    
 
     <section>
       <pre>
-        
+# Symbolic execution with angr: drive execution to the "Greater" branch
+import angr
+import claripy
+
+proj  = angr.Project("./check_value", auto_load_libs=False)
+
+# Make argv[1] symbolic (a 32-bit integer)
+x = claripy.BVS("x", 32)
+state = proj.factory.entry_state(args=["./check_value", x])
+
+# Explore until the program prints "Greater", avoid the "Lesser or Equal" branch
+simgr = proj.factory.simgr(state)
+simgr.explore(
+    find=lambda s: b"Greater" in s.posix.dumps(1),
+    avoid=lambda s: b"Lesser or Equal" in s.posix.dumps(1),
+)
+
+# Recover a concrete solution for x
+if simgr.found:
+    model = simgr.found[0].solver.eval(x, cast_to=int)
+    print("x =", model)   # e.g., x = 8
       </pre>
     </section>
 

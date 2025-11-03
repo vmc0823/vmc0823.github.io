@@ -22,26 +22,71 @@
 
     <br /><br />
 
-    <main>
-      <div class="hero-text">
-        <p><strong>Frontend:</strong> PySide6 (Qt) for the desktop UI and event handling.</p>
-        <p><strong>Backend:</strong> Python workers handle analysis work and stream logs back to the UI.</p>
-        <p><strong>Packaging:</strong> PyInstaller is used so the app can run without a local Python install.</p>
-      </div>
-    </main>
+    <section class="content">
+  <h2>Frontend</h2>
+<p>
+  <a href="https://doc.qt.io/qtforpython-6/" target="_blank" rel="noopener noreferrer">PySide6 (Qt for Python)</a>
+  provides the GUI toolkit—widgets, layouts, and the signal/slot system—so the interface stays responsive while
+  analysis runs in the background. I used a hybrid frontend workflow: for stable layouts, I designed screens in
+  <a href="https://doc.qt.io/qt-6/qtdesigner-manual.html" target="_blank" rel="noopener noreferrer">Qt Designer</a>
+  and loaded the resulting <code>.ui</code> files at runtime from Python (no stub generation), which kept iteration fast.
+  For views requiring dynamic composition, conditional widgets, or tighter control over signals/slots, I implemented
+  the UI directly in PySide6 code.
+</p>
+<ul>
+  <li>Tabbed layout for configuration, run controls, logs, and status.</li>
+  <li>Non-blocking updates: progress and logs stream into the UI without freezing.</li>
+  <li>Form validation: inline checks for paths, args, and limits.</li>
+</ul>
 
-    <section>
-      <pre>
-UI (PySide6)
-  ├── Tabs & forms
-  ├── Start/Stop actions
-  └── Log panel
-Backend Worker (Python)
-  ├── Load target & libs
-  ├── Call analysis engine
-  └── Emit progress/results → UI
-      </pre>
-    </section>
+  <h2>Backend</h2>
+  <p>
+  The backend is Python with <a href="https://docs.angr.io/" target="_blank" rel="noopener noreferrer">angr</a> for
+  binary analysis and <a href="https://docs.angr.io/en/latest/core-concepts/symbolic.html#claripy" target="_blank" rel="noopener noreferrer">claripy</a>
+  for symbolic values and path constraints. angr lifts native code to the <strong>VEX</strong> intermediate representation
+  (via <em>pyvex</em>), which provides a uniform, SSA-like view of instructions across architectures. Constraints are managed via claripy.
+</p>
+<ul>
+  <li><strong>VEX IR (pyvex):</strong> lift machine code to a normalized form for analysis and path exploration.</li>
+  <li><strong>angr state &amp; sim manager:</strong> create states, step execution, and explore with <code>find/avoid</code> or techniques.</li>
+  <li><strong>claripy constraints:</strong> track and solve path conditions to recover concrete inputs when needed.</li>
+</ul>
+
+<h3>Concurrency (single process, multi-threaded)</h3>
+<p>
+  The final app runs as a single process but uses multithreading to separate the analysis engine from the UI logic.
+  The GUI stays responsive while a worker thread performs long-running analysis and streams status, logs, and partial results back to improve UX.
+</p>
+<ul>
+  <li><strong>UI thread (PySide6):</strong> renders views, handles input, receives signals/queued events.</li>
+  <li><strong>Worker thread:</strong> loads binaries, steps the analysis, emits progress, supports cancel/stop.</li>
+  <li><strong>Responsiveness:</strong> heavy work runs off the main thread; progress bars and logs update live.</li>
+</ul>
+
+  <h2>Data & Packaging</h2>
+  <ul>
+    <li><strong>SQLite:</strong> lightweight storage for session metadata (targets, args, timestamps), cached results, and quick lookups. 
+      <a href="https://www.sqlite.org/" target="_blank" rel="noopener noreferrer">https://www.sqlite.org/</a>
+    </li>
+    <li><strong>Logging:</strong> structured logs (level, timestamp, source) shown live in the UI and saved for later review.</li>
+    <li><strong>PyInstaller:</strong> bundles the app so users don’t need a Python install—aiming for a fast, one-click setup. 
+      <a href="https://pyinstaller.org/" target="_blank" rel="noopener noreferrer">https://pyinstaller.org/</a>
+    </li>
+  </ul>
+
+  <h2>How pieces connect</h2>
+  <pre>
+GUI (PySide6)
+  ├── Tabs & forms → validate inputs
+  ├── Start/Stop → enqueue job
+  └── Log/Status ← stream events
+Worker (Python)
+  ├── Load binary → angr state(s)
+  ├── Explore paths (claripy constraints)
+  └── Results → GUI + SQLite
+  </pre>
+</section>
+
 
     <footer class="site-footer">
       <hr />
