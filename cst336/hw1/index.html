@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Binary Analysis Project – Overview</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet" />
+    <link href="css/styles.css" rel="stylesheet" />
+  </head>
+
+  <body>
+    <header>
+      <h1>Binary Analysis Desktop Application</h1>
+    </header>
+    <hr />
+    <nav>
+      <a href="index.html" class="active">Overview</a>
+      <a href="analysis.html">Binary Analysis</a>
+      <a href="design.html">Design & Wireframes</a>
+      <a href="stack.html">Tech Stack</a>
+    </nav>
+
+    <br /><br />
+
+    <main>
+      <div class="hero-text">
+        <p>
+          This summer I interned as a Software Engineer at a cybersecurity startup, where I built a lightweight
+          desktop interface for a binary analysis engine. The app studies compiled programs without source code and
+          lets users configure runs, monitor progress, and review results from path exploration.
+        </p>
+      </div>
+    </main>
+
+    <section class="content">
+      <h2>Problem</h2>
+      <p>
+        The existing enterprise tool is feature-heavy and ships as a large virtual-machine image (≈20–30&nbsp;GB).
+        Its legacy capabilities create a complex install and a long time-to-value before analysts can run symbolic execution.
+      </p>
+
+      <h2>Solution</h2>
+      <p>
+        Provide a streamlined desktop variant focused solely on symbolic execution, delivered via a simple installer
+        or setup wizard so users can start analyzing binaries in minutes.
+      </p>
+
+      <h2>Who it’s for</h2>
+      <ul>
+       <li>Red Teams, reverse engineers, threat hunters, vulnerability researchers.</li>
+       <li>DevSecOps &amp; QA can keep the CLI or enterprise edition where needed.</li>
+      </ul>
+
+      <h2>What it uncovers</h2>
+      <p>Memory-safety issues like buffer overflows, null-pointer dereferences, and double frees.</p>
+
+      <h2>Why it matters</h2>
+      <ul>
+       <li><strong>Better UX, faster starts:</strong> a focused desktop UI replaces heavy VM images and complex setup, so users get to results sooner.</li>
+       <li><strong>Sharper findings:</strong> new vulnerability detection techniques surface memory-safety issues earlier and with clearer context.</li>
+       <li><strong>Smarter exploration:</strong> novel path–prioritization strategies improve performance and reduce wasted exploration.</li>
+       <li><strong>Broader targets:</strong> expanded support for bare-metal firmware and Java bytecode analysis, in addition to typical ELF/PE binaries.</li>
+       <li><strong>Maintainable & extensible:</strong> cleaner design patterns make it easier to add features, test behavior, and deliver updates quickly.</li>
+       </ul>
+
+       <p>
+        A high-level user workflow looks like this:
+       </p>
+    </section>
+    
+    <figure>
+        <img src="img/user_workflow.png" alt="User's workflow" width="350">
+    </figure>
+    
+
+    <footer class="site-footer">
+      <hr>
+      CST336 Internet Programming. 2025&copy; Waltman <br>
+      <img class="footer-logo" src="img/csumb_logo.png" alt="CSUMB logo" width="300" />
+    </footer>
+  </body>
+</html>

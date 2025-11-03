@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Binary Analysis Project – Binary Analysis & Symbolic Execution</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet" />
+    <link href="css/styles.css" rel="stylesheet" />
+  </head>
+
+  <body>
+    <header>
+      <h1>Binary Analysis Desktop Application</h1>
+    </header>
+    <hr />
+    <nav>
+      <a href="index.html">Overview</a>
+      <a href="analysis.html" class="active">Binary Analysis</a>
+      <a href="design.html">Design & Wireframes</a>
+      <a href="stack.html">Tech Stack</a>
+    </nav>
+
+    <br /><br />
+
+    <main>
+      <div class="hero-text">
+        <h2>What is Binary Analysis?</h2>
+        <p>
+          Binary analysis studies compiled programs (no source code required) to understand how they behave: what code runs, what inputs steer execution, and where bugs might live. 
+          Tools emulate instructions, track memory/registers, and reason about paths to surface issues like buffer overflows or use-after-free. This is useful for reverse engineering, red-teaming, and vulnerability research.
+        </p>
+        <h2>What is <a href="https://docs.angr.io/en/latest/core-concepts/symbolic.html" target="_blank" rel="noopener noreferrer">symbolic execution</a>?</h2>
+        <p>
+          Symbolic execution runs a program with symbolic inputs instead of concrete values. When the program branches on a symbolic value, the engine can follow both sides, recording the logical condition (constraint) that makes each path possible. Solving those constraints gives test inputs that reproduce each path—including bug-revealing ones. 
+          It’s powerful, but it is important to manage path explosion (the number of paths can blow up) with strategies and limits.
+        </p>
+        <h2>What is <a href="https://docs.angr.io/" target="_blank" rel="noopener noreferrer">angr</a>?</h2>
+        <p>
+          angr is a Python framework for binary analysis. 
+          It mixes static and dynamic/symbolic techniques and gives you high-level APIs to load a binary, create program states, and explore many paths at once using a SimulationManager
+        </p>
+      </div>
+    </main>
+
+    <section>
+      <pre>
+        load target → create symbolic state → explore paths (with limits) → summarize results → review in UI
+      </pre>
+    </section>
+
+    <section>
+      <pre>
+        
+      </pre>
+    </section>
+
+    <footer class="site-footer">
+      <hr />
+      CST336 Internet Programming. 2025&copy; Waltman <br />
+      <strong>Disclaimer:</strong> The information in this webpage is fictitious. <br />
+      <img class="footer-logo" src="img/csumb_logo.png" alt="CSUMB logo" width="300" />
+    </footer>
+  </body>
+</html>

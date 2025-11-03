@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Binary Analysis Project – Tech Stack & Architecture</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet" />
+    <link href="css/styles.css" rel="stylesheet" />
+  </head>
+  <body>
+    <header>
+      <h1>Binary Analysis Desktop Application</h1>
+    </header>
+    <hr />
+    <nav>
+      <a href="index.html">Overview</a>
+      <a href="analysis.html">Binary Analysis</a>
+      <a href="design.html">Design & Wireframes</a>
+      <a href="stack.html" class="active">Tech Stack</a>
+    </nav>
+
+    <br /><br />
+
+    <main>
+      <div class="hero-text">
+        <p><strong>Frontend:</strong> PySide6 (Qt) for the desktop UI and event handling.</p>
+        <p><strong>Backend:</strong> Python workers handle analysis work and stream logs back to the UI.</p>
+        <p><strong>Packaging:</strong> PyInstaller is used so the app can run without a local Python install.</p>
+      </div>
+    </main>
+
+    <section>
+      <pre>
+UI (PySide6)
+  ├── Tabs & forms
+  ├── Start/Stop actions
+  └── Log panel
+Backend Worker (Python)
+  ├── Load target & libs
+  ├── Call analysis engine
+  └── Emit progress/results → UI
+      </pre>
+    </section>
+
+    <footer class="site-footer">
+      <hr />
+      CST336 Internet Programming. 2025&copy; Waltman <br />
+      <strong>Disclaimer:</strong> The information in this webpage is fictitious. <br />
+      <img class="footer-logo" src="img/csumb_logo.png" alt="CSUMB logo" width="300" />
+    </footer>
+  </body>
+</html>
