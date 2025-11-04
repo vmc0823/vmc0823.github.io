@@ -26,7 +26,7 @@
   <h2>Frontend</h2>
 <p>
   <a href="https://doc.qt.io/qtforpython-6/" target="_blank" rel="noopener noreferrer">PySide6 (Qt for Python)</a>
-  provides the GUI toolkit—widgets, layouts, and the signal/slot system—so the interface stays responsive while
+  provides the GUI toolkit, widgets, layouts, and the signal/slot system so the interface stays responsive while
   analysis runs in the background. I used a hybrid frontend workflow: for stable layouts, I designed screens in
   <a href="https://doc.qt.io/qt-6/qtdesigner-manual.html" target="_blank" rel="noopener noreferrer">Qt Designer</a>
   and loaded the resulting <code>.ui</code> files at runtime from Python (no stub generation), which kept iteration fast.
@@ -47,7 +47,7 @@
   (via <em>pyvex</em>), which provides a uniform, SSA-like view of instructions across architectures. Constraints are managed via claripy.
 </p>
 <ul>
-  <li><strong>VEX IR (pyvex):</strong> lift machine code to a normalized form for analysis and path exploration.</li>
+  <li><strong>VEX <a href="https://docs.angr.io/en/latest/advanced-topics/ir.html target="_blank" rel="noopener noreferrer">Intermediate Representation:</a></strong> lift machine code to a normalized form for analysis and path exploration.</li>
   <li><strong>angr state &amp; sim manager:</strong> create states, step execution, and explore with <code>find/avoid</code> or techniques.</li>
   <li><strong>claripy constraints:</strong> track and solve path conditions to recover concrete inputs when needed.</li>
 </ul>
@@ -62,6 +62,10 @@
   <li><strong>Worker thread:</strong> loads binaries, steps the analysis, emits progress, supports cancel/stop.</li>
   <li><strong>Responsiveness:</strong> heavy work runs off the main thread; progress bars and logs update live.</li>
 </ul>
+  <figure>
+        <img src="img/analysis_status.png" alt="Wireframe: Analysis Status" width="520" />
+        <figcaption>Through multithreading, the end user can still interact with the application while analysis is in progress</figcaption>
+      </figure>
 
   <h2>Data & Packaging</h2>
   <ul>
