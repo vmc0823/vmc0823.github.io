@@ -1,5 +1,6 @@
 * { box-sizing: border-box; }                   
-html, body { height: 100%; }                      
+html, body { height: 100%; } 
+
 body {
   margin: 0;                                    
   background-color: #000;                         
@@ -21,7 +22,8 @@ main, header, nav, footer, section {
 header {
   text-align: center;                          
   padding-top: 32px;                              
-  padding-bottom: 8px;                         
+  padding-bottom: 8px;
+  font-family: 'Courier New', Courier, monospace;                         
 }
 header h1 {
   margin: 0 0 8px 0;                            
